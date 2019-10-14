@@ -19,7 +19,7 @@ const twitter_client = new Twitter({
   access_token_key: access_token_key,
   access_token_secret: access_token_secret
 });
-let downloadURL = "";
+let downloadURL = '';
 
 export const getTweet = functions.https.onCall(async (data, context) => {
   const result = await getTweetsFromTwitter();
@@ -37,9 +37,9 @@ export const getTweet = functions.https.onCall(async (data, context) => {
 export const getTweets = functions.https.onRequest(async (request, response) => {
   const result = await getTweetsFromTwitter();
   if (result !== undefined) {
-    response.send({"text": `error:${result}`});
+    response.send({'text': `error:${result}`});
   }
-  response.send({"text": "upload complete!"});
+  response.send({'text': 'upload complete!'});
 });
  
 async function getTweetsFromTwitter() {
@@ -51,7 +51,7 @@ try {
     console.log(res[tweet].text);
     const user = res[tweet].user.name;
     const currTweet = res[tweet].text;
-    const trimTweet = currTweet.split("https://");
+    const trimTweet = currTweet.split('https://');
     await writeToAudio(`${user} says, ${trimTweet[0]}`);
   }
 } catch (error) {
